@@ -37,6 +37,4 @@ public class PayPalCheckout {
             System.out.println("Не найден элемент");
         }
     }
-
-
 }

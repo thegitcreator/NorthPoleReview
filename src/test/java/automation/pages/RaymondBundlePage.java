@@ -15,7 +15,7 @@ public class RaymondBundlePage {
         this.driver = driver;
     }
 
-    private static By MAIN_IMAGE = By.xpath("//img[@id='bigimg']");
+    private static final By MAIN_IMAGE = By.xpath("//img[@id='bigimg']");
     private static final By BUY_BUTTON = By.xpath("//input[@alt='PayPal - The safer, easier way to pay online!']");
     private static final By BUNDLE_COST_IMAGE = By.xpath("//img[@alt='Bundle Cost']");
 

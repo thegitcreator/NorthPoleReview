@@ -7,8 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MainPage {
     private static final By HOLIDAY_BREADS = By.xpath("//a[contains(text(),'Holiday Breads')]");
-    private static final By TEACHER_LOG_IN = By.xpath("//a[contains(text(), 'Teacher') " +
-            "and @href='/Account/login.asp?teacher']");
+    private static final By TEACHER_LOG_IN = By.xpath("//a[@href='/Account/login.asp?teacher']");
     private static final By RAYMOND_BUNDLE_LINK = By.xpath("//a[@class='home-btn' and @href='/ReindeerBarn/raymond-bundle/']");
 
     protected final WebDriver driver;

@@ -4,14 +4,15 @@ import automation.org.example.ConfProperties;
 import automation.pages.AccountPage;
 import automation.pages.MainPage;
 import automation.pages.TeacherLoginPage;
-import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class LoginTeacherTest extends AbstractTest {
-    public static String EMAIL = "2bhpb@indigobook.com";
-    public static String PASSWORD = "pass1234";
+    public static String EMAIL = ConfProperties.getEmail();
+    public static String PASSWORD = ConfProperties.getPassword();
     public static String URL = ConfProperties.getProperty("mainpage");
 
     public static TeacherLoginPage loginPage;
@@ -22,6 +23,8 @@ public class LoginTeacherTest extends AbstractTest {
     public void preconditions() {
         setUp();
         mainpage = new MainPage(driver);
+        loginPage = new TeacherLoginPage(driver);
+        accountTeacher = new AccountPage(driver);
     }
 
     @AfterMethod
@@ -29,21 +32,17 @@ public class LoginTeacherTest extends AbstractTest {
         shoutDown();
     }
 
-    //пишем тест
     @Test(description = "Log in as Teacher")
     public void loginTest() throws InterruptedException {
-        driver.get(URL);
         mainpage.loginAsTeacherLink();
 
-        loginPage = new TeacherLoginPage(driver);
-        loginPage.inputEmail(EMAIL);
-        loginPage.inputPassword(PASSWORD);
-        loginPage.clickLogIn();
+        loginPage.inputEmail(EMAIL)
+                .inputPassword(PASSWORD)
+                .clickLogIn();
 
-        accountTeacher = new AccountPage(driver);
-        Assertions.assertTrue(accountTeacher.isAccountImgDisplayed(), "Элемент не найден");
-        Assertions.assertTrue(accountTeacher.isDashboardDisplayed(), "Элемент не найден");
-        Assertions.assertTrue(accountTeacher.isUserGreetingDisplayed(), "Элемент не найден");
-        Assertions.assertTrue(accountTeacher.isLogOutButtonDisplayed(), "Элемент не найден");
+        assertTrue(accountTeacher.isAccountImgDisplayed(), "Не найдено основной картинки на странице аккаунта");
+        assertTrue(accountTeacher.isDashboardDisplayed(), "Дашборд на странице аккаунта не найден");
+        assertTrue(accountTeacher.isUserGreetingDisplayed(), "Текст приветствия юзера не найден");
+        assertTrue(accountTeacher.isLogOutButtonDisplayed(), "Ссылка на выход из аккаунта не найдена");
     }
 }

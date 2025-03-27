@@ -4,10 +4,11 @@ import automation.org.example.ConfProperties;
 import automation.pages.MainPage;
 import automation.pages.PayPalPages.PayPalCheckout;
 import automation.pages.RaymondBundlePage;
-import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BuyBundleTest extends AbstractTest {
     public static String URL = ConfProperties.getProperty("mainpage");
@@ -20,6 +21,9 @@ public class BuyBundleTest extends AbstractTest {
     public void preconditions() {
         setUp();
         mainpage = new MainPage(driver);
+        raymondBundlePage = new RaymondBundlePage(driver);
+        payPalCheckout = new PayPalCheckout(driver);
+        raymondBundlePage = new RaymondBundlePage(driver);
     }
 
     @AfterMethod
@@ -29,24 +33,18 @@ public class BuyBundleTest extends AbstractTest {
 
     @Test(description = "Cancel buy bundle")
     public void cancelBuyBundleTest() {
-        driver.get(URL);
-
         mainpage.plushToyAndCardsLink();
 
-        raymondBundlePage = new RaymondBundlePage(driver);
-        Assertions.assertTrue(raymondBundlePage.isBundleImageDisplayed(), "Элемент не найден");
-        Assertions.assertTrue(raymondBundlePage.isImageDisplayed(), "Элемент не найден");
+        assertTrue(raymondBundlePage.isBundleImageDisplayed(), "Картинка скидки не найдена");
+        assertTrue(raymondBundlePage.isImageDisplayed(), "Основная картинка не найдена");
 
         raymondBundlePage.buyButtonClick();
 
-        payPalCheckout = new PayPalCheckout(driver);
-        Assertions.assertTrue(payPalCheckout.isTitleDisplayed(), "Элемент не найден");
-        Assertions.assertTrue(payPalCheckout.isContinueButtonDisplayed(), "Элемент не найден");
+        assertTrue(payPalCheckout.isTitleDisplayed(), "Заголовок страницы оплаты не найден");
+        assertTrue(payPalCheckout.isContinueButtonDisplayed(), "Кнопка 'Продолжить' не найдена");
         payPalCheckout.cancelBuyLink();
 
-        raymondBundlePage = new RaymondBundlePage(driver);
-        Assertions.assertTrue(raymondBundlePage.isBundleImageDisplayed(), "Элемент не найден");
-        Assertions.assertTrue(raymondBundlePage.isImageDisplayed(), "Элемент не найден");
+        assertTrue(raymondBundlePage.isBundleImageDisplayed(), "Картинка скидки не найдена");
+        assertTrue(raymondBundlePage.isImageDisplayed(), "Основная картинка не найдена");
     }
-
 }

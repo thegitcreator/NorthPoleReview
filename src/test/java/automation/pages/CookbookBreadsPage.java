@@ -11,6 +11,7 @@ public class CookbookBreadsPage {
     private static final By BREADS_IMG = By.xpath("//img[@src='/images/kitchen/banner_cat60.gif']");
     private static final By BREADS_BLOCK = By.id("CBcontain2");
     private static final By RECIPE_SEARCH = By.xpath("//form[@action='Recipe-Search.asp']");
+    private static final By BANANA_BREAD_LINK = By.xpath("//a[contains(text(), 'Banana Bread')]");
 
     public CookbookBreadsPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -36,6 +37,6 @@ public class CookbookBreadsPage {
 
     @Step("Select recipe")
     public void clickOnRecipeLink(){
-        driver.findElement(By.xpath("//a[contains(text(), 'Banana Bread')]")).click();
+        driver.findElement(BANANA_BREAD_LINK).click();
     }
 }

@@ -18,18 +18,20 @@ public class TeacherLoginPage {
     }
 
     @Step("Enter email")
-    public void inputEmail(String email){
+    public TeacherLoginPage inputEmail(String email){
         driver.findElement(EMAIL_FIELD).sendKeys(email);
+        return this;
     }
 
     @Step("Enter password")
-    public void inputPassword(String password){
+    public TeacherLoginPage inputPassword(String password){
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
+        return this;
     }
 
-    @Step("Click Log in button")
-    public void clickLogIn(){
+    @Step("Click Log in")
+    public TeacherLoginPage clickLogIn(){
         driver.findElement(By.xpath(LOG_IN_IMG)).click();
+        return this;
     }
-
 }

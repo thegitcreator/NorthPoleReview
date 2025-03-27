@@ -8,7 +8,6 @@ import org.testng.annotations.AfterClass;
 
 import java.util.concurrent.TimeUnit;
 
-
 public class AbstractTest {
     public static WebDriver driver;
 
